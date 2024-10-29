@@ -1,8 +1,14 @@
-# Usa uma imagem PHP com suporte para FPM
+# Usa uma imagem do PHP com suporte para FPM
 FROM php:8.2-fpm
 
 # Instala extensões do PHP
-RUN docker-php-ext-install pdo pdo_mysql
+RUN apt-get update && apt-get install -y \
+    git \
+    zip \
+    unzip \
+    libzip-dev \
+    && docker-php-ext-install zip \
+    && docker-php-ext-install pdo pdo_mysql
 
 # Instala o Composer
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
@@ -20,5 +26,5 @@ COPY . .
 # Instala dependências do Laravel e do Vite
 RUN composer install && npm install
 
-# Permite que o Vite rode na porta 5173
-EXPOSE 5173
+# Exponha as portas para o Laravel e o Vite
+EXPOSE 8000 5173
