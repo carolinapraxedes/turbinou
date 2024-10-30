@@ -1,7 +1,7 @@
 @extends('layouts.app', ['class' => 'g-sidenav-show bg-gray-100'])
 
 @section('content')
-    @include('layouts.navigation', ['title' => 'PETS'])
+    
     <form action="{{ route('destino.store') }}" method="POST">
         @csrf
         <label for="estado">Estado:</label>

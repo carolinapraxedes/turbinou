@@ -1,0 +1,29 @@
+.header-bg-color{
+    background-color:#F5F5F5;
+}
+
+.header-nav{
+    display: flex; 
+    justify-content: space-around;
+    align-items: center;
+
+}
+.nav-item{
+    font-family: "Montserrat", sans-serif;
+    font-weight: 600;
+
+
+    color: #171717;
+
+}
+.logout{
+    font-family: "Fira Sans", sans-serif;
+    font-weight: 400;
+    font-size: 20px;
+
+}
+.logout:hover{
+    cursor: pointer;
+    
+}
+
