@@ -12,9 +12,16 @@ body{
 }
 
 a{
+  color: #171717;
   text-decoration: none;
-
 }
+a:hover{
+  color: #FE7F00;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+
 
 .logo{
   width: 20rem;
@@ -30,14 +37,12 @@ a{
   font-weight: 700;
   font-size: 16px;
   color: #F5F5F5;
-  &hover{
-    color: #FE9933;
-  }
 
 }
-.button-primary{
+.button-primary:hover{
   color: #F5F5F5;
   background-color: #FE9933;
+  cursor: pointer;
 }
 
 .input-login{
@@ -47,4 +52,87 @@ a{
   padding: 12px 16px;
   background-color: #E5E5E5;
 
+}
+
+.content {
+  max-width: 1020px;
+  margin: 48px auto 0;
+}
+
+.list-header{
+  display: flex;
+  justify-content: space-between;
+  align-items:center;
+}
+
+.list-container{
+  margin-top: 48px;
+  background-color: #F5F5F5;
+  padding: 60px 72px;
+
+}
+
+.container-form{
+  display: flex;
+  justify-content: space-between;
+}
+
+.w-full{
+  width: 100%;
+}
+
+.pagination {
+  display: flex;
+  flex-direction: row;
+  justify-content:space-between;
+  margin-top: 20px;
+  list-style-type: none;
+}
+.pagination p{
+  width: 100%;
+}
+.pagination div span svg{
+  width: 3%;
+}
+
+.pagination  a {
+  padding: 8px 12px;
+  color: #A3A3A3;
+  text-decoration: none;
+
+}
+
+.pagination a:visited{
+  color: #FE7F00;
+
+}
+
+.table {
+  border: 1px solid #E5E5E5;
+  width: 100%;
+  border-collapse: collapse; /* Para evitar bordas duplas */
+}
+
+.table th {
+  padding: 8px;
+  border-bottom: 1px solid #E5E5E5;
+}
+
+.table tr td {
+  padding: 8px;
+  text-align: center;
+  vertical-align: middle;
+  border-bottom: 1px solid #E5E5E5;
+}
+
+/* Remove a borda inferior da última linha */
+.table tr:last-child td {
+  border-bottom: none;
+}
+
+.table a.edit:hover svg path{
+  fill:#FE7F00;
+}
+.table a.delete:hover svg path{
+  fill: #EF4444;
 }

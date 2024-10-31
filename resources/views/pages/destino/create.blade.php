@@ -1,21 +1,18 @@
-@extends('layouts.app', ['class' => 'g-sidenav-show bg-gray-100'])
+@extends('layouts.app')
 
 @section('content')
+    <article>
+        <section>
+            <div class="list-header">
+                <h1>Destinos</h1>
+                <a class="button-primary" href="{{route('destino.index')}}">Voltar</a>
+                
+            </div>
+            <x-destino-form /> 
+        </section>
+    </article>
     
-    <form action="{{ route('destino.store') }}" method="POST">
-        @csrf
-        <label for="estado">Estado:</label>
-        <select id="estado" name="estado">
-            <option value="">Selecione o estado</option>
-        </select>
-        
-        <label for="cidade">Cidade:</label>
-        <select id="cidade" name="cidade">
-            <option value="">Selecione a cidade</option>
-        </select>
-        
-        <button type="submit">Salvar</button>
-    </form>
+    
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
@@ -26,19 +23,21 @@
                 return a.nome.localeCompare(b.nome);
             });
             estados.forEach(function(estado) {
-                $('#estado').append(`<option value="${estado.id}">${estado.nome}</option>`);
+                console.log(estado)
+                $('#estado').append(`<option value="${estado.sigla}">${estado.nome}</option>`);
             });
             console.log(estado)
         });
 
         // Carregar as cidades ao selecionar um estado
         $('#estado').change(function() {
-            var estadoId = $(this).val();
+            let estadoId = $(this).val();
             if (estadoId) {
                 $.getJSON(`https://servicodados.ibge.gov.br/api/v1/localidades/estados/${estadoId}/municipios`, function(cidades) {
                     $('#cidade').empty().append('<option value="">Selecione a cidade</option>');
                     cidades.forEach(function(cidade) {
-                        $('#cidade').append(`<option value="${cidade.id}">${cidade.nome}</option>`);
+                        console.log(cidade)
+                        $('#cidade').append(`<option value="${cidade.nome}">${cidade.nome}</option>`);
                     });
                 });
             } else {

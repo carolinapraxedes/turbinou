@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Destino;
+use Exception;
 
 class DestinoController extends Controller
 {
@@ -18,7 +19,9 @@ class DestinoController extends Controller
      */
     public function index()
     {
-        // return view('pages.destino.create');
+        $destinos = $this->destino->paginate(5);
+
+        return view('pages.destino.index', compact('destinos'));
     }
 
     /**
@@ -28,6 +31,7 @@ class DestinoController extends Controller
      */
     public function create()
     {
+        
         return view('pages.destino.create');
     }
 
@@ -39,7 +43,25 @@ class DestinoController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->all());
+        //dd($request->all());
+        try {
+            // Valida os dados com base nas regras definidas no modelo.
+            $validatedData = $request->validate($this->destino->rules());
+            //dd($validatedData);
+    
+            // Cria um novo registro com os dados validados.
+            $destino = $this->destino->create([
+                'cidade' => $validatedData['cidade'],
+                'estado' => $validatedData['estado'],
+            ]);
+            
+            // Redireciona para a rota destino.index com uma mensagem de sucesso.
+            return redirect()->route('destino.index')->with('success', 'Destino criado com sucesso!');
+            
+        } catch (Exception $e) {
+            // Captura a exceção e retorna para a página anterior com a mensagem de erro.
+            return redirect()->back()->with('error', 'Erro ao criar destino: ' . $e->getMessage());
+        }
     }
 
     /**
@@ -60,8 +82,14 @@ class DestinoController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {
-        //
+    {   
+        //todos os destinos salvos no banco
+        $destinos = $this->destino->get();
+
+        //o destino do id
+        $destino = $this->destino->find($id);
+
+        return view('pages.destino.edit', compact('destinos','destino'));
     }
 
     /**
@@ -73,7 +101,26 @@ class DestinoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        try {
+            // Valida os dados com base nas regras definidas no modelo.
+            $validatedData = $request->validate($this->destino->rules());
+            
+            // Encontra o destino existente pelo ID.
+            $destino = $this->destino->findOrFail($id);
+            
+            // Atualiza o registro com os dados validados.
+            $destino->update([
+                'cidade' => $validatedData['cidade'],
+                'estado' => $validatedData['estado'],
+            ]);
+            
+            // Redireciona para a rota destino.index com uma mensagem de sucesso.
+            return redirect()->route('destino.index')->with('success', 'Destino atualizado com sucesso!');
+            
+        } catch (Exception $e) {
+            // Captura a exceção e retorna para a página anterior com a mensagem de erro.
+            return redirect()->back()->with('error', 'Erro ao atualizar destino: ' . $e->getMessage());
+        }
     }
 
     /**
