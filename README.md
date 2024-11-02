@@ -25,3 +25,9 @@ php artisan migrate --seed
 ``` 
 docker compose up
 ```
+
+# Login
+
+Um usuário será criado junto com a criação das tabelas.
+Usuario: admin@teste.com   
+Senha: adminadmin
