@@ -23,6 +23,14 @@ class Destino extends Model
         
     }
 
+    public function feedback(){
+        return [
+            'cidade.required' => 'Informe o nome da cidade',
+            'cidade.max' => 'A cidade deve ter no máximo 255 caracteres',
+            'estado.required' => 'Necessário escolher um estado!',
+        ];
+    }
+
     public function passeios()
     {
         return $this->hasMany(Passeio::class);

@@ -17,7 +17,8 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('destino_id');
             $table->string('nome');
-            $table->enum('horario', ['Manhã', 'Tarde', 'Noite']);
+            $table->enum('horario',  ['morning', 'afternoon', 'night']);
+            $table->string('imagem',100)->nullable();
             $table->string('descricao', 260)->nullable();
             
             $table->foreign('destino_id')->references('id')->on('destino');

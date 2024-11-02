@@ -14,17 +14,33 @@ class Passeio extends Model
         'destino_id',
         'nome',
         'horario',
+        'imagem',
         'descricao',
     ];
 
     public function rules()
     {   return [
-            'destino_id' => 'required|exists:destinos,id',
+            'destino_id' => 'required|exists:destino,id',
             'nome' => 'required|string|max:255',
-            'horario' => 'required|in:Manhã,Tarde,Noite',
+            'horario' => 'required|in:morning,afternoon,night',
+            'imagem' => 'nullable',
             'descricao' => 'nullable|string|max:260',
         ];
     }
+
+    public function feedback(){
+        return [
+            'required.destino' => 'Necessário escolher um destino!',
+            'nome.required' => 'Informe o nome do passeio',
+            'nome.unique' => 'O passeio já existe',
+            'name.max' => 'O passeio deve ter no máximo 255 caracteres',
+            'horario.required' => 'O horário é obrigatório.',
+            'horario.in' => 'O horário selecionado é inválido.',
+           
+            
+        ];
+    }
+
 
     public function destino()
     {

@@ -28,8 +28,12 @@
                 </select>
             </div>
         </div>
+        <div style="display: flex; justify-content: flex-end;">
+            <button type="submit" 
+            class="button-emerald">Salvar</button>
+
+        </div>
         
-        <button type="submit" class="button-primary">Salvar</button>
     </form>
 </div>
 

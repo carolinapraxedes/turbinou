@@ -9,6 +9,7 @@ use Exception;
 class DestinoController extends Controller
 {
 
+    protected $destino;
     public function __construct(Destino $destino){
         $this->destino = $destino;
    }
@@ -50,12 +51,12 @@ class DestinoController extends Controller
             //dd($validatedData);
     
             // Cria um novo registro com os dados validados.
-            $destino = $this->destino->create([
+            $passeio = $this->destino->create([
                 'cidade' => $validatedData['cidade'],
                 'estado' => $validatedData['estado'],
             ]);
             
-            // Redireciona para a rota destino.index com uma mensagem de sucesso.
+            // Redireciona para a rota passeio.index com uma mensagem de sucesso.
             return redirect()->route('destino.index')->with('success', 'Destino criado com sucesso!');
             
         } catch (Exception $e) {
@@ -64,16 +65,6 @@ class DestinoController extends Controller
         }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
 
     /**
      * Show the form for editing the specified resource.
@@ -131,6 +122,15 @@ class DestinoController extends Controller
      */
     public function destroy($id)
     {
-        //
+;
+        try {
+
+            $destino = $this->destino->find($id);
+            $destino->delete();
+    
+            return redirect()->route('destino.index')->with('success', 'Destino excluído com sucesso!');
+        } catch (Exception $e) {
+            return redirect()->route('destino.index')->with('error', 'Erro ao excluir o destino: ' . $e->getMessage());
+        }
     }
 }
